@@ -16,5 +16,16 @@
         return $app['twig']->render('home.html.twig', array('artists' => CD::getAll()));
     });
 
+    $app->get('/add_cd', function() use ($app) {
+        return $app['twig']->render('add_cd.html.twig');
+    });
+
+    $app->post('/added', function() use ($app) {
+        $cd = new CD($_POST['artist']);
+        $cd->save();
+
+        return $app['twig']->render('added_cd.html.twig');
+    });
+
     return $app;
 ?>
