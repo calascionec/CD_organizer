@@ -21,10 +21,17 @@
     });
 
     $app->post('/added', function() use ($app) {
-        $cd = new CD($_POST['artist']);
-        $cd->save();
+        if(!empty($_POST['artist'])) {
+            $cd = new CD($_POST['artist']);
+            $cd->save();
+        }
 
         return $app['twig']->render('added_cd.html.twig');
+    });
+
+    $app->get('/delete', function() use ($app) {
+        CD::deleteLast();
+        return $app['twig']->render('home.html.twig', array('artists' => CD::getAll()));
     });
 
     return $app;

@@ -33,5 +33,10 @@ class CD
     {
         $_SESSION['list_of_artists'] = array();
     }
+
+    static function deleteLast()
+    {
+        array_pop($_SESSION['list_of_artists']);
+    }
 }
  ?>
